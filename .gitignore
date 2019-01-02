@@ -37,3 +37,7 @@ Thumbs.db
 WD40/ProjectSettings/
 
 WD40/\.vs/
+
+WD40/UIElementsSchema/
+
+WD40/Logs/Packages-Update\.log
