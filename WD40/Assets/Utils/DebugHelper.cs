@@ -6,6 +6,20 @@ namespace WD40
 {
 	public class DebugHelper 
 	{
+        public static void Log(string text)
+		{
+			#if UNITY_EDITOR
+			Debug.Log (text);
+			#endif
+		}
+		
+		public static void Log(object obj)
+		{
+			#if UNITY_EDITOR
+			Debug.Log (obj.ToString());
+			#endif
+		}
+
 		public static void LogWarning(string text)
 		{
 			#if UNITY_EDITOR
