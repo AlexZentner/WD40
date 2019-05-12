@@ -26,8 +26,8 @@ namespace WD40
 
         public override void OnInspectorGUI()
         {
-            MonoScript ms = target as MonoScript;
-            System.Type type = ms.GetClass();
+            System.Type type = monoScript.GetClass();
+          
             if (type != null && type.IsSubclassOf(typeof(ScriptableObject)) && !type.IsSubclassOf(typeof(Editor)) && !type.IsSubclassOf(typeof(EditorWindow)))
             {
                 newName = EditorGUILayout.TextField("New asset name", newName);
