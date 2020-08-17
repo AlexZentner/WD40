@@ -91,7 +91,7 @@ namespace WD40
 
                             nestedAssetObj.name = string.Format("nested asset " + y);
                           
-                           AssetDatabase.AddObjectToAsset(nestedAssetObj, asset);
+                            AssetDatabase.AddObjectToAsset(nestedAssetObj, asset);
                            
                             objs = AssetDatabase.LoadAllAssetsAtPath(path);                          
                         }
@@ -99,12 +99,19 @@ namespace WD40
                         foreach (var o in objs)
                         {
                            string p = AssetDatabase.GetAssetPath(o);
+                           
                            AssetDatabase.ImportAsset(p, ImportAssetOptions.DontDownloadFromCacheServer);
+                            Debug.Log(p);
                         }
 
-                        AssetDatabase.Refresh(ImportAssetOptions.DontDownloadFromCacheServer);
-                        EditorGUIUtility.PingObject(asset);
+                        //AssetDatabase.Refresh(ImportAssetOptions.DontDownloadFromCacheServer);
+                        //EditorGUIUtility.PingObject(asset);
+
+                        Selection.activeObject = asset;
                     }
+
+                    AssetDatabase.SaveAssets();
+                    AssetDatabase.Refresh();
                 }
             }
             else
