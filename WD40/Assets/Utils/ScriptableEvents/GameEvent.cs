@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace WD40
 {
-   [CreateAssetMenu(menuName = "ScriptableEvents" ,fileName = "newEvent")]
 	public class GameEvent : ScriptableObject 
 	{
 		List<GameEventListener> listeners = new List <GameEventListener>();

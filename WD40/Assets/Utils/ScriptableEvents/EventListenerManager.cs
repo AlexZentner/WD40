@@ -9,18 +9,23 @@ namespace WD40
     {
 	    public GameEventListener[] EventListeners;
 	    public GameEventListenerInt[] EventListenersInt;
+		public GameEventListenerFloat[] EventListenersFloat;
 
-	    public void OnEnable()
+		public void OnEnable()
 	    {
 		    foreach (GameEventListener eventListener in EventListeners)
 		    {
 			    eventListener.Register();
 		    }
-		    foreach (GameEventListenerInt eventListenerInt in EventListenersInt)
+		    foreach (GameEventListenerInt eventListener in EventListenersInt)
 		    {
-			    eventListenerInt.Register();
+			    eventListener.Register();
 		    }
-	    }
+			foreach (GameEventListenerFloat eventListener in EventListenersFloat)
+			{
+				eventListener.Register();
+			}
+		}
 
 	    public void OnDisable()
 	    {
@@ -28,11 +33,15 @@ namespace WD40
 		    {
 			    eventListener.UnRegister();
 		    }
-		    foreach (GameEventListenerInt eventListenerInt in EventListenersInt)
+		    foreach (GameEventListenerInt eventListener in EventListenersInt)
 		    {
-			    eventListenerInt.UnRegister();
+			    eventListener.UnRegister();
 		    }
-	    }	
+			foreach (GameEventListenerFloat eventListener in EventListenersFloat)
+			{
+				eventListener.UnRegister();
+			}
+		}	
     }
 
     [System.Serializable]
@@ -57,7 +66,13 @@ namespace WD40
 	    }
     }
 
-    [System.Serializable]
+	[System.Serializable]
+	public class UnityEventInt : UnityEvent<int>
+	{
+
+	}
+
+	[System.Serializable]
     public class GameEventListenerInt
     {
 	    public GameEventInt Event;
@@ -79,9 +94,31 @@ namespace WD40
 	    }
     }
 
-    [System.Serializable] 
-    public class UnityEventInt: UnityEvent <int>
-    {
-	
-    }
+	[System.Serializable]
+	public class UnityEventFloat : UnityEvent<float>
+	{
+
+	}
+
+	[System.Serializable]
+	public class GameEventListenerFloat
+	{
+		public GameEventFloat Event;
+		public UnityEventFloat Response;
+
+		public void OnEventRaised(float param)
+		{
+			Response.Invoke(param);
+		}
+
+		public void Register()
+		{
+			Event.RegisterListener(this);
+		}
+
+		public void UnRegister()
+		{
+			Event.UnregisterListener(this);
+		}
+	}
 }
